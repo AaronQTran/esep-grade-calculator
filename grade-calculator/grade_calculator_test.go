@@ -49,3 +49,35 @@ func TestGetGradeF(t *testing.T) {
 		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
 	}
 }
+
+func TestGetGradeC(t *testing.T) {
+	gc := NewGradeCalculator()
+	gc.AddGrade("assignment", 70, Assignment)
+	gc.AddGrade("exam", 70, Exam)
+	gc.AddGrade("essay", 70, Essay)
+
+	if gc.GetFinalGrade() != "C" {
+		t.Error("Expected C")
+	}
+}
+func TestGetGradeD(t *testing.T) {
+	gc := NewGradeCalculator()
+	gc.AddGrade("assignment", 60, Assignment)
+	gc.AddGrade("exam", 60, Exam)
+	gc.AddGrade("essay", 60, Essay)
+
+	if gc.GetFinalGrade() != "D" {
+		t.Error("Expected D")
+	}
+}
+func TestNoGrades(t *testing.T) {
+	gc := NewGradeCalculator()
+	if gc.GetFinalGrade() != "F" {
+		t.Error("Expected F")
+	}
+}
+func TestGradeType(t *testing.T) {
+	if Assignment.String() != "assignment" {
+		t.Error("Wrong grade type")
+	}
+}
